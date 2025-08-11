@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile - Expenses</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .profile-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .profile-header h2 {
+      margin: 0;
+      color: #333;
+    }
+
+    .expenses-list {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .expenses-list th, .expenses-list td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .expenses-list th {
+      background-color: #f0f0f0;
+      font-weight: 600;
+    }
+
+    .expenses-list tr:hover {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">
+      <h2>User Profile</h2>
+      <p>Email: user@example.com</p>
+    </div>
+
+    <table class="expenses-list">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025-06-01</td>
+          <td>Food</td>
+          <td>$12.50</td>
+          <td>Lunch at cafe</td>
+        </tr>
+        <tr>
+          <td>2025-06-03</td>
+          <td>Transport</td>
+          <td>$3.75</td>
+          <td>Bus fare</td>
+        </tr>
+        <tr>
+          <td>2025-06-05</td>
+          <td>Utilities</td>
+          <td>$45.00</td>
+          <td>Electric bill</td>
+        </tr>
+        <!-- Add more rows dynamically via JS or backend -->
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
