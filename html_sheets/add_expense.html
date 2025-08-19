@@ -42,7 +42,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker</title>
+    <title>Add Expense - Expense Tracker</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -61,17 +61,15 @@
 
     <!-- Main Content -->
     <main class="container mx-auto mt-8 p-4">
-        <section class="bg-white rounded-lg shadow-md p-6 text-center">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Welcome!</h2>
-            <p class="text-gray-600 mb-6">This is your expense tracking application. Start by adding a new expense or view reports to manage your finances.</p>
-            <button id="openModalBtn" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">Add Expense</button>
-        </section>
-    </main>
-
-    <!-- Modal for Adding Expense -->
-    <div id="expenseModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg shadow-md p-6 w-full max-w-md">
+        <section class="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
             <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Add New Expense</h2>
+            {% if messages %}
+                <ul class="mb-4 text-red-600">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <form method="POST" action="{% url 'add_expense' %}">
                 {% csrf_token %}
                 <div class="mb-4">
@@ -97,39 +95,15 @@
                     <label for="description" class="block text-gray-700 font-medium mb-2">Description (Optional)</label>
                     <textarea id="description" name="description" class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" rows="4"></textarea>
                 </div>
-                <div class="flex justify-end space-x-4">
-                    <button type="button" id="closeModalBtn" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Save Expense</button>
-                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">Save Expense</button>
             </form>
-        </div>
-    </div>
+            <p class="mt-4 text-center text-gray-600"><a href="{% url 'home' %}" class="text-blue-600 hover:underline">Back to Home</a></p>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white text-center p-4 mt-8">
         <p>&copy; 2025 Expense Tracker. All rights reserved.</p>
     </footer>
-
-    <!-- JavaScript for Modal -->
-    <script>
-        const openModalBtn = document.getElementById('openModalBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const modal = document.getElementById('expenseModal');
-
-        openModalBtn.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-        });
-
-        closeModalBtn.addEventListener('click', () => {
-            modal.classList.add('hidden');
-        });
-
-        // Close modal when clicking outside the form
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
-            }
-        });
-    </script>
 </body>
 </html>

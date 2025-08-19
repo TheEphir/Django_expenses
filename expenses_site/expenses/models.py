@@ -11,7 +11,7 @@ class ExpenseCategory(models.Model):
     
 
 class Expense(models.Model):
-    ammont = models.DecimalField(decimal_places=2)
+    ammont = models.DecimalField(max_digits=6, decimal_places=2)
     category = models.ForeignKey(ExpenseCategory, on_delete=models.PROTECT)
     date = models.DateField()
     description = models.TextField(null=True, blank=True)
