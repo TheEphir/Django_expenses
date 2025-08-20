@@ -55,12 +55,12 @@
                 <li><a href="" class="hover:underline">Home</a></li>
                 
                 {% if user.is_authenticated  %}
-                    <li><a href="{% url 'add_expense' %}" class="hover:underline">Add Expense</a></li>
-                    <li><a href="{% url 'reports' %}" class="hover:underline">Reports</a></li>
-                    <li><a href="{% url 'logout' %}" class="hover:underline">Logout</a></li>
+                    <li><a href="{% url 'expenses:add_expense' %}" class="hover:underline">Add Expense</a></li>
+                    <li><a href="{% url 'expenses:index' %}" class="hover:underline">Reports</a></li>
+                    <li><a href="" class="hover:underline">Logout</a></li>
                     
                     {% if user.is_superuser or user.is_staff %}
-                        <li><a href="{% url 'logout' %}" class="hover:underline">Admin panel</a></li>
+                        <li><a href="" class="hover:underline">Admin panel</a></li>
                     {% endif %}
                 
                 {% else %}
