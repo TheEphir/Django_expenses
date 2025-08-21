@@ -52,7 +52,7 @@
                 {% endfor %}
             </ul>
             {% endif %}
-            <form method="POST" action="{% url 'add_expense' %}">
+            <form method="POST" action="">
                 {% csrf_token %}
                 <div class="mb-4">
                     <label for="amount" class="block text-gray-700 font-medium mb-2">Amount</label>
@@ -79,7 +79,7 @@
                 </div>
                 <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">Save Expense</button>
             </form>
-            <p class="mt-4 text-center text-gray-600"><a href="{% url 'home' %}" class="text-blue-600 hover:underline">Back to Home</a></p>
+            <p class="mt-4 text-center text-gray-600"><a href="{% url 'expenses:index' %}" class="text-blue-600 hover:underline">Back to Home</a></p>
         </section>
     </main>
 {% endblock content %}
