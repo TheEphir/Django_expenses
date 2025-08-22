@@ -1,3 +1,4 @@
+from pyexpat import model
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
@@ -20,3 +21,36 @@ class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ["username", "password"]
+        
+
+class UserRegistrationForm(UserCreationForm):
+    class_attr = "block text-gray-700 font-medium mb-2"
+    
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={
+            "class": class_attr,
+        }
+    ))
+    email = forms.CharField(widget=forms.EmailInput(
+        attrs={
+            "class": class_attr,
+        }
+    ))
+    password1 = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            "class": class_attr,
+        }
+    ))
+    password2 = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            "class": class_attr,
+        }
+    ))
+    
+    class Meta:
+        model = User
+        fields = ["username", "email", "password1", "password2"]
+        
+    def save(self, commit=True):
+        user = super(UserRegistrationForm, self).save(commit=True)
+        return user

@@ -1,10 +1,11 @@
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic.base import TemplateView
-from django.urls import reverse
+from django.views.generic.edit import CreateView
+from django.urls import reverse, reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 
-from users.forms import UserLoginForm
+from users.forms import UserLoginForm, UserRegistrationForm
 
 # Create your views here.
 # class LoginView(TemplateView):
@@ -12,9 +13,14 @@ from users.forms import UserLoginForm
 #     title = "Expenses - Login"
 
 
-class RegisterView(TemplateView):
+class UserRegistrationView(SuccessMessageMixin, CreateView):
     template_name = "users/register.html"
+    form_class = UserRegistrationForm
     title = "Register - Expense Tracker"
+    success_message = "You successfully registered"
+    
+    def get_success_url(self):
+        return reverse_lazy("user:login")
     
 
 def login (request):
