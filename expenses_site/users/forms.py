@@ -24,7 +24,7 @@ class UserLoginForm(AuthenticationForm):
         
 
 class UserRegistrationForm(UserCreationForm):
-    class_attr = "block text-gray-700 font-medium mb-2"
+    class_attr = "w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
     
     username = forms.CharField(widget=forms.TextInput(
         attrs={

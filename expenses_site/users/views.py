@@ -20,7 +20,7 @@ class UserRegistrationView(SuccessMessageMixin, CreateView):
     success_message = "You successfully registered"
     
     def get_success_url(self):
-        return reverse_lazy("user:login")
+        return reverse_lazy("users:login")
     
 
 def login (request):
