@@ -60,7 +60,7 @@
                     <li><a href="{% url "users:logout" %}" class="hover:underline">Logout</a></li>
                     
                     {% if user.is_superuser or user.is_staff %}
-                        <li><a href="admin:index" class="hover:underline">Admin panel</a></li>
+                        <li><a href="{% url "admin:index" %}" class="hover:underline">Admin panel</a></li>
                     {% endif %}
                 
                 {% else %}

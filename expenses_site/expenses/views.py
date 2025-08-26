@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic.base import TemplateView
 
-from expenses.models import Expense
+from expenses.models import Expense, ExpenseCategory
+from expenses.forms import AddExpenseForm
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -15,6 +16,21 @@ class ExpensesView(TemplateView):
     title = "Expenses Report"
 
 
-class AddExpense(TemplateView):
-    model = Expense
-    template_name = "expenses/add_expense.html"
+def add_expense(request):
+    if request.method == "POST":
+        pass
+        form = AddExpenseForm(data=request.POST)
+        if form.is_valid():
+            amount = float(request.POST["amount"])
+            category = ExpenseCategory.objects.get(name=request.POST["category"])
+            date = request.POST["date"]
+            description = request.POST["description"]
+            user = request.user
+            Expense.objects.create(amount=amount, category=category, date = date, description=description, user=user)
+            return HttpResponseRedirect(request.META["HTTP_REFERER"])
+    else:
+        form = AddExpenseForm()
+        
+    context = {"form":form}
+    return render(request, "expenses/add_expense.html", context=context)
+
