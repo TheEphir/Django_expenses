@@ -1,10 +1,10 @@
 from django.urls import path
 
-from expenses.views import ExpensesView, add_expense
+from expenses.views import user_expenses, add_expense
 
 app_name = "expenses"
 
 urlpatterns = [
-    path("", ExpensesView.as_view(), name="index"),
+    path("", user_expenses, name="index"),
     path("add/", add_expense, name="add_expense")
 ]

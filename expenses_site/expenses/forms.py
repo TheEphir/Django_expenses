@@ -9,6 +9,15 @@ CHOISES = [
     ("Other","Other"),
 ]
 
+FILTERS = [
+    ("All","All Categories"),
+    ("Food","Food"),
+    ("Transport","Transport"),
+    ("Entertainment","Entertainment"),
+    ("Bills","Bills"),
+    ("Other","Other"),
+]
+
 class AddExpenseForm(forms.Form):
     amount = forms.DecimalField( 
         min_value=0.01, 
@@ -31,3 +40,22 @@ class AddExpenseForm(forms.Form):
     class Meta:
         model = Expense
         fields = ["amount", "category", "date", "description"]
+        
+
+class FiltersForm(forms.Form):
+    left_date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={"type":"date", "class":"w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"})
+    )
+    right_date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={"type":"date", "class":"w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"})
+    )
+    category = forms.CharField(
+        required=False,
+        widget=forms.Select(attrs={"class":"w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"}, choices=FILTERS),
+    )
+    
+    class Meta:
+        # model = Expense
+        fields = ["left_date", "right_date", "category"]

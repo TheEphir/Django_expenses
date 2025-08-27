@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic.base import TemplateView
 
 from expenses.models import Expense, ExpenseCategory
-from expenses.forms import AddExpenseForm
+from expenses.forms import AddExpenseForm, FiltersForm
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -10,12 +10,27 @@ class IndexView(TemplateView):
     title = "Expenses"
     
 
-class ExpensesView(TemplateView):
-    model = Expense
-    template_name = "expenses/reports.html"
-    title = "Expenses Report"
+def user_expenses(request):
+    form = FiltersForm()
+    expenses = Expense.objects.filter(user=request.user)
+   
+    # if form.is_valid():
+    left_date = request.GET.get("left_date")        
+    right_date = request.GET.get("right_date")        
+    category = request.GET.get("category")        
 
+    if  left_date:
+        expenses = expenses.filter(date__gte=left_date)
+    if  right_date:
+        expenses = expenses.filter(date__lte=right_date)
+    if  category != "All":
+        expenses = expenses.filter(category=ExpenseCategory.objects.get(name=category))
+        
+        
+    context = {"expenses": expenses, "form": form}
+    return render(request, "expenses/reports.html", context=context)
 
+        
 def add_expense(request):
     if request.method == "POST":
         pass
