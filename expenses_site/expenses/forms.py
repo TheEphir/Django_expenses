@@ -10,7 +10,7 @@ CHOISES = [
 ]
 
 FILTERS = [
-    ("All","All Categories"),
+    (None,"All Categories"),
     ("Food","Food"),
     ("Transport","Transport"),
     ("Entertainment","Entertainment"),
